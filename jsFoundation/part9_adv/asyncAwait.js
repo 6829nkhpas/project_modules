@@ -1,8 +1,16 @@
 function fetchUserData() {
   return new Promise((resolve, reject) => {
+    
     setTimeout(() => {
-      reject({ name: "chaicode", url: "https://chaicode.com" });
+      if(Math.random() >=0.9){
+      resolve({ name: "chaicode", url: "https://chaicode.com" });
+    }
+    else {
+      reject("Failed to fetch user data");
+    }
     }, 3000);
+  
+    
   });
 }
 
