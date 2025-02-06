@@ -8,7 +8,7 @@ function fetchUserData() {
     else {
       reject("Failed to fetch user data");
     }
-    }, 3000);
+    }, 3000); 
   
     
   });
@@ -26,3 +26,4 @@ async function getUserData() {
   }
 }
 getUserData();
+ 
