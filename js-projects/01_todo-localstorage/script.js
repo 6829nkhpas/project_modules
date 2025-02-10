@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     tasks.push(newTask);
     savetasks();
+    rendertask(newTask);
     input.value = "";
     console.log(tasks);
   });
