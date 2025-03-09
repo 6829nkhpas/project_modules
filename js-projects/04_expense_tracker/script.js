@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+=document.addEventListener("DOMContentLoaded", () => {
   const expenseForm = document.getElementById("expense-form");
   const expenseNameInput = document.getElementById("expense-name");
   const expenseAmountInput = document.getElementById("expense-amount");
@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
   let totalAmount = calculateTotal();
-
   renderExpenses();
 
   expenseForm.addEventListener("submit", (e) => {
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       renderExpenses();
       updateTotal();
 
-      //clear input
+  
       expenseNameInput.value = "";
       expenseAmountInput.value = "";
     }
