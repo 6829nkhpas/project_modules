@@ -36,6 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cart.push(product);
     renderCart();
   }
+  function removeitem(totalPrice, product) {
+    
+  }
 
   function renderCart() {
     cartItems.innerText = "";
@@ -45,19 +48,27 @@ document.addEventListener("DOMContentLoaded", () => {
       emptyCartMessage.classList.add("hidden");
       cartTotalMessage.classList.remove("hidden");
       cart.forEach((item, index) => {
-        totalPrice += item.price;
+       totalPrice += item.price;
         const cartItem = document.createElement("div");
         cartItem.innerHTML = `
-        ${item.name} - $${item.price.toFixed(2)}
+        ${item.name} - $${item.price.toFixed(2)} - <button  data-index="${index}">Remove</button>
         `;
+        const removeBtn = cartItem.querySelector("button");
+        removeBtn.addEventListener("click", () => {
+          cart.splice(index, 1);
+          totalPrice -= item.price;
+          renderCart();
+        });
         cartItems.appendChild(cartItem);
         totalPriceDisplay.textContent = `${totalPrice.toFixed(2)}`;
+        
       });
     } else {
       emptyCartMessage.classList.remove("hidden");
       totalPriceDisplay.textContent = `$0.00`;
     }
   }
+
 
   checkOutBtn.addEventListener("click", () => {
     cart.length = 0;
