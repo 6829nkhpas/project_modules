@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const startBtn = document.getElementById("start-btn");
   const nextBtn = document.getElementById("next-btn");
   const restartBtn = document.getElementById("restart-btn");
@@ -13,11 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
       question: "What is the capital of France?",
       choices: ["Paris", "London", "Berlin", "Madrid"],
       answer: "Paris",
+      marks: 4,
     },
     {
       question: "Which planet is known as the Red Planet?",
       choices: ["Mars", "Venus", "Jupiter", "Saturn"],
       answer: "Mars",
+      marks: 3,
     },
     {
       question: "Who wrote 'Hamlet'?",
@@ -28,60 +31,68 @@ document.addEventListener("DOMContentLoaded", () => {
         "Mark Twain",
       ],
       answer: "William Shakespeare",
+      marks: 2,
     },
   ];
-
   let currentQuestionIndex = 0;
   let score = 0;
-
+  let scucess=0;
   startBtn.addEventListener("click", startQuiz);
-
-  nextBtn.addEventListener("click", () => {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-      showQuestion();
-    } else {
-      showResult();
-    }
-  });
-
-  restartBtn.addEventListener("click", () => {
-    currentQuestionIndex = 0;
-    score = 0;
-    resultContainer.classList.add("hidden");
-    startQuiz();
-  });
-
-  function startQuiz() {
+   function startQuiz() {
     startBtn.classList.add("hidden");
     resultContainer.classList.add("hidden");
     questionContainer.classList.remove("hidden");
     showQuestion();
-  }
+}
+  restartBtn.addEventListener("click", () => {
+    currentQuestionIndex = 0;
+    score = 0;
+    scucess=0;
+    resultContainer.classList.add("hidden");
+    startQuiz();
+  });
+  
+  nextBtn.addEventListener("click", () =>{
+    currentQuestionIndex++;
+    if(currentQuestionIndex < questions.length){
+        showQuestion();
+    }
+    else{
+        Result();
+    }
+  });
 
-  function showQuestion() {
+function showQuestion() {
     nextBtn.classList.add("hidden");
-    questionText.textContent = questions[currentQuestionIndex].question;
-    choicesList.innerHTML = ""; //clear previous choices
+    questionText.textContent =questions[currentQuestionIndex].question;
+    choicesList.innerHTML='';
     questions[currentQuestionIndex].choices.forEach((choice) => {
-      const li = document.createElement("li");
-      li.textContent = choice;
-      li.addEventListener("click", () => selectAnswer(choice));
-      choicesList.appendChild(li);
-    });
-  }
+        const li = document.createElement("li");
+        li.textContent= choice;
+        li.addEventListener("click",() => selectAnwser(choice));
+        choicesList.appendChild(li);
 
-  function selectAnswer(choice) {
-    const correctAnswer = questions[currentQuestionIndex].answer;
-    if (choice === correctAnswer) {
-      score++;
+    });
+    
+
+
+
+}
+function selectAnwser(choice){
+    if(choice === questions[currentQuestionIndex].answer){
+        score+= questions[currentQuestionIndex].marks;
+        scucess++;
+
     }
     nextBtn.classList.remove("hidden");
-  }
 
-  function showResult() {
+}
+function Result(){
+
     questionContainer.classList.add("hidden");
     resultContainer.classList.remove("hidden");
-    scoreDisplay.textContent = `${score} out of ${questions.length}`;
-  }
+    scoreDisplay.textContent=`marks = ${score}  got   ${scucess} / ${questions.length} `;
+}
+
+
 });
