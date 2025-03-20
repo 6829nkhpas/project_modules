@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     __dirname,
     req.url === "/" ? "index.html" : req.url
   );
-  console.log(filePath);
+//finding the extension name and making them in lowercase 
 
   const extName = String(path.extname(filePath)).toLowerCase();
 
@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
     ".js": "text/javascript",
     ".png": "text/png",
   };
-
+//checking the content type which present with us to serve
   const contentType = mimeTypes[extName] || "application/octet-stream";
 
   fs.readFile(filePath, (err, content) => {
@@ -28,6 +28,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("404: File Not Found BRooooo");
       }
+      // giving the response with content
     } else {
       res.writeHead(200, { "Content-Type": contentType });
       res.end(content, "utf-8");
