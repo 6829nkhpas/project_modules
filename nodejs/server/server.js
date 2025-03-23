@@ -5,6 +5,7 @@ const path = require("path");
 const port = 3000;
 
 const server = http.createServer((req, res) => {
+  // creating the file path  details of current working dir
   const filePath = path.join(
     __dirname,
     req.url === "/" ? "index.html" : req.url
@@ -24,6 +25,7 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(filePath, (err, content) => {
     if (err) {
+      //
       if (err.code === "ENOENT") {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("404: File Not Found BRooooo");
